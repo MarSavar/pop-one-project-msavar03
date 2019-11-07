@@ -5,7 +5,7 @@ def read_cities(file_name):
     for element in read.readlines():
         element = element.rstrip("\n")
         sub = element.split("\t")
-        details = (sub[0],sub[1],sub[2],sub[3])
+        details = (sub[0],sub[1],float(sub[2]),float(sub[3]))
         all_cities.append(details)
 
     return all_cities
@@ -22,6 +22,8 @@ def read_cities(file_name):
     pass
   
 def print_cities(road_map):
+    for city in road_map:
+        print(city[0],city[1],round(city[2],2),round(city[3],2))
     """
     Prints a list of cities, along with their locations. 
     Print only one or two digits after the decimal point.
@@ -81,6 +83,3 @@ def main():
 
 if __name__ == "__main__": #keep this in
     main()
-
-print(read_cities("city-data.txt"))
-
