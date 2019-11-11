@@ -10,6 +10,9 @@ def test_compute_total_distance():
            pytest.approx(9.386+18.496+10.646, 0.01)
 
     '''add your further tests'''
+def test_distance():
+
+    assert distance(1,2,3,4) == pytest.approx(2.828,0.01)
 
 def test_swap_cities():
     '''add your tests'''
