@@ -2,11 +2,11 @@ def read_cities(file_name):
 
     read = open(file_name, "r")
     all_cities = []
+
     for element in read.readlines():
-        element = element.rstrip("\n")
-        sub = element.split("\t")
-        details = (sub[0],sub[1],float(sub[2]),float(sub[3]))
-        all_cities.append(details)
+        sub = element.rstrip("\n").split("\t")
+        state,city,latitude,longitude = sub[0],sub[1],float(sub[2]),float(sub[3])
+        all_cities.append((state,city,latitude,longitude))
 
     return all_cities
     """
@@ -19,18 +19,20 @@ def read_cities(file_name):
 
       Alabama -> Alaska -> Arizona -> ... -> Wyoming -> Alabama.
     """
-    pass
   
 def print_cities(road_map):
     for city in road_map:
-        print(city[0],city[1],round(city[2],2),round(city[3],2))
+        print(city[1]+",",
+              city[0]+",",
+              round(city[2],2),
+              round(city[3],2))
     """
     Prints a list of cities, along with their locations. 
     Print only one or two digits after the decimal point.
     """
-    pass
 
 def compute_total_distance(road_map):
+
     """
     Returns, as a floating point number, the sum of the distances of all 
     the connections in the `road_map`. Remember that it's a cycle, so that 
@@ -83,3 +85,5 @@ def main():
 
 if __name__ == "__main__": #keep this in
     main()
+
+print_cities(read_cities("city-data.txt"))
