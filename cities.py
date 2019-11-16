@@ -28,7 +28,7 @@ def read_cities(file_name):
   
 def print_cities(road_map):
     for city in road_map:
-        print(f"{city[1]}, {city[0]} ({round(city[2],2)}, {round(city[3],2)})")
+        print(f"{city[1]}, {city[0]} ({city[2]:.2f}, {city[3]:.2f})")
     """
     Prints a list of cities, along with their locations. 
     Print only one or two digits after the decimal point.
