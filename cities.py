@@ -42,7 +42,7 @@ def compute_total_distance(road_map):
     length = len(road_map)
     total_distance = 0
 
-    for i in range(len(road_map)):
+    for i in range(length):
         total_distance += distance(road_map[i][2],road_map[i][3],
                                    road_map[(i+1) % length][2],road_map[(i+1) % length][3])
 
@@ -127,14 +127,14 @@ def find_best_cycle(road_map):
 def print_map(road_map):
 
     length = len(road_map)
-    total_distance = 0
 
-    for i in range(len(road_map)):
-        total_distance += distance(road_map[i][2], road_map[i][3], road_map[(i + 1)%length][2], road_map[(i + 1)%length][3])
+    for i in range(length):
+
         print(f"{road_map[i][1]}, {road_map[i][0]} -> {road_map[(i + 1)%length][1]}, {road_map[(i + 1)%length][0]}:"
-              f" {distance(road_map[i][2], road_map[i][3], road_map[(i + 1)%length][2], road_map[(i + 1)%length][3]):.2f}")
+              f" {distance(road_map[i][2], road_map[i][3], road_map[(i+ 1)%length][2], road_map[(i + 1)%length][3]):.2f}")
 
-    print("Total cost ",round(compute_total_distance(road_map),2))
+    print(f"Total cost: {compute_total_distance(road_map):.2f}")
+
 
     """
     Prints, in an easily understandable format, the cities and 
@@ -142,16 +142,18 @@ def print_map(road_map):
     and the total cost.
     """
 
-def main():
 
-    print_cities(read_cities("city-data.txt"))
+def main():
+    list_of_cities = "city-data.txt"
+    print_cities(read_cities(list_of_cities))
     print("-"*40)
-    print_map(find_best_cycle(read_cities("city-data.txt")))
+    print_map(find_best_cycle(read_cities(list_of_cities)))
 
     """
     Reads in, and prints out, the city data, then creates the "best"
     cycle and prints it out.
     """
+
 
 if __name__ == "__main__": #keep this in
     main()
