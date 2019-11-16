@@ -1,5 +1,6 @@
 import random
 import math
+import copy
 
 def read_cities(file_name):
 
@@ -38,14 +39,12 @@ def distance(x1,y1,x2,y2):
 
 def compute_total_distance(road_map):
 
-    last = len(road_map)-1
+    length = len(road_map)
     total_distance = 0
 
     for i in range(len(road_map)):
-        if i != last:
-            total_distance += distance(road_map[i][2],road_map[i][3],road_map[i+1][2],road_map[i+1][3])
-        else:
-            total_distance += distance(road_map[i][2],road_map[i][3],road_map[0][2],road_map[0][3])
+        total_distance += distance(road_map[i][2],road_map[i][3],
+                                   road_map[(i+1) % length][2],road_map[(i+1) % length][3])
 
     return total_distance
 
@@ -90,30 +89,69 @@ def shift_cities(road_map):
     """
 
 def find_best_cycle(road_map):
+
+    test = 1
+    best_distance = compute_total_distance(road_map)
+    best_cycle = copy.deepcopy(road_map)
+
+    while test <= 10000:
+
+        swap_or_shift = random.randint(1, 2)
+
+        if swap_or_shift == 1:
+            random_index_1 = random.randint(0, len(road_map)-1)
+            random_index_2 = random.randint(0, len(road_map)-1)
+            swap_cities(road_map,random_index_1,random_index_2)
+
+        else:
+            shift_cities(road_map)
+
+        cycle_distance = compute_total_distance(road_map)
+
+        if cycle_distance < best_distance:
+            best_distance = cycle_distance
+            best_cycle = copy.deepcopy(road_map)
+
+        test += 1
+
+    return best_cycle
+
+
     """
     Using a combination of `swap_cities` and `shift_cities`, 
     try `10000` swaps/shifts, and each time keep the best cycle found so far. 
     After `10000` swaps/shifts, return the best cycle found so far.
     Use randomly generated indices for swapping.
     """
-    pass
 
 def print_map(road_map):
+
+    length = len(road_map)
+    total_distance = 0
+
+    for i in range(len(road_map)):
+        total_distance += distance(road_map[i][2], road_map[i][3], road_map[(i + 1)%length][2], road_map[(i + 1)%length][3])
+        print(f"{road_map[i][1]}, {road_map[i][0]} -> {road_map[(i + 1)%length][1]}, {road_map[(i + 1)%length][0]}:"
+              f" {distance(road_map[i][2], road_map[i][3], road_map[(i + 1)%length][2], road_map[(i + 1)%length][3]):.2f}")
+
+    print("Total cost ",round(compute_total_distance(road_map),2))
+
     """
     Prints, in an easily understandable format, the cities and 
     their connections, along with the cost for each connection 
     and the total cost.
     """
-    pass
 
 def main():
 
-    print_cities((shift_cities(read_cities("city-data.txt"))))
+    print_cities(read_cities("city-data.txt"))
+    print("-"*40)
+    print_map(find_best_cycle(read_cities("city-data.txt")))
+
     """
     Reads in, and prints out, the city data, then creates the "best"
     cycle and prints it out.
     """
-
 
 if __name__ == "__main__": #keep this in
     main()
