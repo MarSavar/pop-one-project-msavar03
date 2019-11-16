@@ -27,10 +27,7 @@ def read_cities(file_name):
   
 def print_cities(road_map):
     for city in road_map:
-        print(city[1]+",",
-              city[0]+":",
-              round(city[2],2),
-              round(city[3],2))
+        print(f"{city[1]}, {city[0]} ({round(city[2],2)}, {round(city[3],2)})")
     """
     Prints a list of cities, along with their locations. 
     Print only one or two digits after the decimal point.
@@ -44,7 +41,6 @@ def compute_total_distance(road_map):
     last = len(road_map)-1
     total_distance = 0
 
-
     for city in range(len(road_map)):
         if city != last:
             total_distance += distance(road_map[city][2],road_map[city][3],road_map[city+1][2],road_map[city+1][3])
@@ -52,7 +48,6 @@ def compute_total_distance(road_map):
             total_distance += distance(road_map[city][2],road_map[city][3],road_map[0][2],road_map[0][3])
 
     return total_distance
-
 
     """
     Returns, as a floating point number, the sum of the distances of all 
@@ -63,6 +58,8 @@ def compute_total_distance(road_map):
 
 def swap_cities(road_map, index1, index2):
 
+    road_map[index1],road_map[index2] = road_map[index2],road_map[index1]
+    return road_map, compute_total_distance(road_map)
 
     """
     Take the city at location `index` in the `road_map`, and the 
@@ -100,13 +97,13 @@ def print_map(road_map):
     pass
 
 def main():
+
+    print_cities(read_cities("city-data.txt"))
     """
     Reads in, and prints out, the city data, then creates the "best"
     cycle and prints it out.
     """
-    pass
+
 
 if __name__ == "__main__": #keep this in
     main()
-
-    print(compute_total_distance(read_cities("city-data.txt")))
