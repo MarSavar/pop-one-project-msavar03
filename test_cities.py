@@ -30,6 +30,13 @@ def test_swap_cities():
 
 
 def test_shift_cities():
-    '''add your tests'''
 
+    road_map1 = [("City 1","State 1", 1, 2),
+                ("City 2","State 2", -2,3),
+                ("City 3","State 3", 25,52),
+                ("City 4","State 4", 33,-1)]
 
+    assert shift_cities(road_map1) == [("City 4","State 4", 33,-1),
+                                       ("City 1","State 1", 1, 2),
+                                       ("City 2","State 2", -2, 3),
+                                       ("City 3","State 3", 25, 52)]

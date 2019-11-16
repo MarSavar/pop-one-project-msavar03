@@ -41,11 +41,11 @@ def compute_total_distance(road_map):
     last = len(road_map)-1
     total_distance = 0
 
-    for city in range(len(road_map)):
-        if city != last:
-            total_distance += distance(road_map[city][2],road_map[city][3],road_map[city+1][2],road_map[city+1][3])
+    for i in range(len(road_map)):
+        if i != last:
+            total_distance += distance(road_map[i][2],road_map[i][3],road_map[i+1][2],road_map[i+1][3])
         else:
-            total_distance += distance(road_map[city][2],road_map[city][3],road_map[0][2],road_map[0][3])
+            total_distance += distance(road_map[i][2],road_map[i][3],road_map[0][2],road_map[0][3])
 
     return total_distance
 
@@ -58,8 +58,11 @@ def compute_total_distance(road_map):
 
 def swap_cities(road_map, index1, index2):
 
-    road_map[index1],road_map[index2] = road_map[index2],road_map[index1]
-    return road_map, compute_total_distance(road_map)
+    if index1 == index2:
+        pass
+    else:
+        road_map[index1],road_map[index2] = road_map[index2],road_map[index1]
+        return road_map, compute_total_distance(road_map)
 
     """
     Take the city at location `index` in the `road_map`, and the 
@@ -73,6 +76,13 @@ def swap_cities(road_map, index1, index2):
     """
 
 def shift_cities(road_map):
+
+    new_road_map = [road_map[-1]]
+
+    for city in range(len(road_map)-1):
+        new_road_map.append(road_map[city])
+
+    return new_road_map
     """
     For every index i in the `road_map`, the city at the position i moves
     to the position i+1. The city at the last position moves to the position
@@ -98,7 +108,7 @@ def print_map(road_map):
 
 def main():
 
-    print_cities(read_cities("city-data.txt"))
+    print_cities((shift_cities(read_cities("city-data.txt"))))
     """
     Reads in, and prints out, the city data, then creates the "best"
     cycle and prints it out.
