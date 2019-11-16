@@ -96,9 +96,7 @@ def find_best_cycle(road_map):
 
     while test <= 10000:
 
-        swap_or_shift = random.randint(1, 2)
-
-        if swap_or_shift == 1:
+        if test % 2 == 0:
             random_index_1 = random.randint(0, len(road_map)-1)
             random_index_2 = random.randint(0, len(road_map)-1)
             swap_cities(road_map,random_index_1,random_index_2)
