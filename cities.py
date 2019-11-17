@@ -1,6 +1,5 @@
 import random
 import math
-import copy
 
 def read_cities(file_name):
 
@@ -9,8 +8,8 @@ def read_cities(file_name):
 
     for element in parse_cities.readlines():
         sub = element.rstrip("\n").split("\t")
-        state,city,latitude,longitude = sub[0],sub[1],float(sub[2]),float(sub[3])
-        all_cities.append((state,city,latitude,longitude))
+        state, city, latitude, longitude = sub[0], sub[1], float(sub[2]), float(sub[3])
+        all_cities.append((state, city, latitude, longitude))
 
     parse_cities.close()
 
@@ -25,17 +24,27 @@ def read_cities(file_name):
 
       Alabama -> Alaska -> Arizona -> ... -> Wyoming -> Alabama.
     """
-  
+
+
 def print_cities(road_map):
-    for city in road_map:
-        print(f"{city[1]}, {city[0]} ({city[2]:.2f}, {city[3]:.2f})")
+
+    print(f"{'-'*70}")
+    print(f"| ## | CITY {' '*15} STATE {' '*14} COORDS")
+    print(f"{'-'*70}")
+
+    for index,city in enumerate(road_map,1):
+        print(f"| {index:02} | {city[1]:<20} {city[0]:<20} ({city[2]:.2f}, {city[3]:.2f})")
+        print(f"{'-' * 70}")
     """
     Prints a list of cities, along with their locations. 
     Print only one or two digits after the decimal point.
     """
+
+
 def distance(x1,y1,x2,y2):
 
     return math.sqrt(abs(x1-x2)**2 + abs(y1-y2)**2)
+
 
 def compute_total_distance(road_map):
 
@@ -92,7 +101,7 @@ def find_best_cycle(road_map):
 
     test = 1
     best_distance = compute_total_distance(road_map)
-    best_cycle = copy.deepcopy(road_map)
+    best_cycle = road_map[:]
 
     while test <= 10000:
 
@@ -108,7 +117,7 @@ def find_best_cycle(road_map):
 
         if cycle_distance < best_distance:
             best_distance = cycle_distance
-            best_cycle = copy.deepcopy(road_map)
+            best_cycle = road_map[:]
 
         test += 1
 
@@ -144,7 +153,6 @@ def print_map(road_map):
 def main():
     list_of_cities = "city-data.txt"
     print_cities(read_cities(list_of_cities))
-    print("-"*40)
     print_map(find_best_cycle(read_cities(list_of_cities)))
 
     """
