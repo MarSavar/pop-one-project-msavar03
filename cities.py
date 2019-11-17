@@ -66,11 +66,10 @@ def compute_total_distance(road_map):
 
 def swap_cities(road_map, index1, index2):
 
-    if index1 == index2:
-        pass
-    else:
-        road_map[index1],road_map[index2] = road_map[index2],road_map[index1]
-        return road_map, compute_total_distance(road_map)
+    if index1 != index2:
+        road_map[index1], road_map[index2] = road_map[index2],road_map[index1]
+
+    return road_map, compute_total_distance(road_map)
 
     """
     Take the city at location `index` in the `road_map`, and the 
@@ -97,6 +96,7 @@ def shift_cities(road_map):
     0. Return the new road map. 
     """
 
+
 def find_best_cycle(road_map):
 
     test = 1
@@ -108,12 +108,12 @@ def find_best_cycle(road_map):
         if test % 2 == 0:
             random_index_1 = random.randint(0, len(road_map)-1)
             random_index_2 = random.randint(0, len(road_map)-1)
-            swap_cities(road_map,random_index_1,random_index_2)
+            perform_swap = swap_cities(road_map, random_index_1, random_index_2)
+            cycle_distance = perform_swap[1]
 
         else:
             shift_cities(road_map)
-
-        cycle_distance = compute_total_distance(road_map)
+            cycle_distance = compute_total_distance(road_map)
 
         if cycle_distance < best_distance:
             best_distance = cycle_distance
