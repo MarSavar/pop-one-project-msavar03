@@ -42,7 +42,7 @@ def print_cities(road_map):
     """
 
 
-def distance(x1,y1,x2,y2):
+def distance(x1, y1, x2, y2):
 
     return math.sqrt(abs(x1-x2)**2 + abs(y1-y2)**2)
 
@@ -68,7 +68,7 @@ def compute_total_distance(road_map):
 def swap_cities(road_map, index1, index2):
 
     if index1 != index2:
-        road_map[index1], road_map[index2] = road_map[index2],road_map[index1]
+        road_map[index1], road_map[index2] = road_map[index2], road_map[index1]
 
     return road_map, compute_total_distance(road_map)
 
@@ -82,6 +82,7 @@ def swap_cities(road_map, index1, index2):
     Allow for the possibility that `index1=index2`,
     and handle this case correctly.
     """
+
 
 def shift_cities(road_map):
 
