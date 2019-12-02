@@ -27,12 +27,13 @@ def read_cities(file_name):
 
 
 def print_cities(road_map):
-
+    print(f"{'-'*70}")
+    print(f"{' '*26} LIST OF CITIES")
     print(f"{'-'*70}")
     print(f"| ## | CITY {' '*15} STATE {' '*14} COORDS")
     print(f"{'-'*70}")
 
-    for index,city in enumerate(road_map,1):
+    for index, city in enumerate(road_map, 1):
         print(f"| {index:02} | {city[1]:<20} {city[0]:<20} ({city[2]:.2f}, {city[3]:.2f})")
         print(f"{'-' * 70}")
     """
@@ -134,14 +135,20 @@ def find_best_cycle(road_map):
 def print_map(road_map):
 
     length = len(road_map)
+    print(f"{' '*26} BEST CYCLE")
+    print(f"{'-'*70}")
+    print(f"| ## | FROM {' '*20} TO {' '*20} COST")
+    print(f"{'-'*70}")
 
-    for i in range(length):
+    for index, i in enumerate(range(length), 1):
 
-        print(f"{road_map[i][1]}, {road_map[i][0]} -> {road_map[(i + 1)%length][1]}, {road_map[(i + 1)%length][0]}:"
+        print(f"| {index:02} | {road_map[i][1]}, {road_map[i][0]:<15} "
+              f"--->"
+              f"{road_map[(i + 1)%length][1]:>10}, {road_map[(i + 1)%length][0]}"
               f" {distance(road_map[i][2], road_map[i][3], road_map[(i+ 1)%length][2], road_map[(i + 1)%length][3]):.2f}")
+        print(f"{'-'*70}")
 
-    print(f"Total cost: {compute_total_distance(road_map):.2f}")
-
+    print(f"{'TOTAL COST':>30}: {compute_total_distance(road_map):.2f}")
 
     """
     Prints, in an easily understandable format, the cities and 
