@@ -1,6 +1,7 @@
 import random
 import math
 
+
 def read_cities(file_name):
 
     parse_cities = open(file_name, "r")
@@ -27,11 +28,11 @@ def read_cities(file_name):
 
 
 def print_cities(road_map):
-    print(f"{'-'*70}")
-    print(f"{' '*26} LIST OF CITIES")
-    print(f"{'-'*70}")
-    print(f"| ## | CITY {' '*15} STATE {' '*14} COORDS")
-    print(f"{'-'*70}")
+    print(f"{'-' * 70}")
+    print(f"{' ' * 26} LIST OF CITIES")
+    print(f"{'-' * 70}")
+    print(f"| ## | CITY {' ' * 15} STATE {' ' * 14} COORDS")
+    print(f"{'-' * 70}")
 
     for index, city in enumerate(road_map, 1):
         print(f"| {index:02} | {city[1]:<20} {city[0]:<20} ({city[2]:.2f}, {city[3]:.2f})")
@@ -43,18 +44,16 @@ def print_cities(road_map):
 
 
 def distance(x1, y1, x2, y2):
-
-    return math.sqrt(abs(x1-x2)**2 + abs(y1-y2)**2)
+    return math.sqrt(abs(x1 - x2) ** 2 + abs(y1 - y2) ** 2)
 
 
 def compute_total_distance(road_map):
-
     length = len(road_map)
     total_distance = 0
 
     for i in range(length):
-        total_distance += distance(road_map[i][2],road_map[i][3],
-                                   road_map[(i+1) % length][2],road_map[(i+1) % length][3])
+        total_distance += distance(road_map[i][2], road_map[i][3],
+                                   road_map[(i + 1) % length][2], road_map[(i + 1) % length][3])
 
     return total_distance
 
@@ -67,8 +66,7 @@ def compute_total_distance(road_map):
 
 def swap_cities(road_map, index1, index2):
 
-    if index1 != index2:
-        road_map[index1], road_map[index2] = road_map[index2], road_map[index1]
+    road_map[index1], road_map[index2] = road_map[index2], road_map[index1]
 
     return road_map, compute_total_distance(road_map)
 
@@ -85,10 +83,9 @@ def swap_cities(road_map, index1, index2):
 
 
 def shift_cities(road_map):
-
     new_road_map = [road_map[-1]]
 
-    for city in range(len(road_map)-1):
+    for city in range(len(road_map) - 1):
         new_road_map.append(road_map[city])
 
     return new_road_map
@@ -100,7 +97,6 @@ def shift_cities(road_map):
 
 
 def find_best_cycle(road_map):
-
     test = 1
     best_distance = compute_total_distance(road_map)
     best_cycle = road_map[:]
@@ -108,8 +104,16 @@ def find_best_cycle(road_map):
     while test <= 10000:
 
         if test % 2 == 0:
-            random_index_1 = random.randint(0, len(road_map)-1)
-            random_index_2 = random.randint(0, len(road_map)-1)
+
+            different_ints = False
+
+            while not different_ints:
+                random_index_1 = random.randint(0, len(road_map) - 1)
+                random_index_2 = random.randint(0, len(road_map) - 1)
+
+                if random_index_1 != random_index_2:
+                    different_ints = True
+
             perform_swap = swap_cities(road_map, random_index_1, random_index_2)
             cycle_distance = perform_swap[1]
 
@@ -133,21 +137,20 @@ def find_best_cycle(road_map):
     Use randomly generated indices for swapping.
     """
 
-def print_map(road_map):
 
+def print_map(road_map):
     length = len(road_map)
-    print(f"{' '*26} BEST CYCLE")
-    print(f"{'-'*70}")
-    print(f"| ## | FROM {' '*20} TO {' '*20} COST")
-    print(f"{'-'*70}")
+    print(f"{' ' * 26} BEST CYCLE")
+    print(f"{'-' * 70}")
+    print(f"| ## | FROM {' ' * 20} TO {' ' * 20} COST")
+    print(f"{'-' * 70}")
 
     for index, i in enumerate(range(length), 1):
-
         print(f"| {index:02} | {road_map[i][1]}, {road_map[i][0]:<15} "
               f"--->"
-              f"{road_map[(i + 1)%length][1]:>10}, {road_map[(i + 1)%length][0]}"
-              f" {distance(road_map[i][2], road_map[i][3], road_map[(i+ 1)%length][2], road_map[(i + 1)%length][3]):.2f}")
-        print(f"{'-'*70}")
+              f"{road_map[(i + 1) % length][1]:>10}, {road_map[(i + 1) % length][0]}"
+              f" {distance(road_map[i][2], road_map[i][3], road_map[(i + 1) % length][2], road_map[(i + 1) % length][3]):.2f}")
+        print(f"{'-' * 70}")
 
     print(f"{'TOTAL COST':>30}: {compute_total_distance(road_map):.2f}")
 
@@ -169,5 +172,5 @@ def main():
     """
 
 
-if __name__ == "__main__": #keep this in
+if __name__ == "__main__":  # keep this in
     main()
