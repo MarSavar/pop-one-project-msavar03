@@ -57,3 +57,4 @@ def test_shift_cities2():
 
     assert shift_cities(road_map1) == [("City 2", "State 2", 12, -52),
                                        ("City 1", "State 1", 8, 9)]
+

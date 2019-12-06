@@ -4,15 +4,13 @@ import math
 
 def read_cities(file_name):
 
-    parse_cities = open(file_name, "r")
-    all_cities = []
+    with open(file_name, "r") as parse_cities:
+        all_cities = []
 
-    for element in parse_cities.readlines():
-        sub = element.rstrip("\n").split("\t")
-        state, city, latitude, longitude = sub[0], sub[1], float(sub[2]), float(sub[3])
-        all_cities.append((state, city, latitude, longitude))
-
-    parse_cities.close()
+        for element in parse_cities.readlines():
+            sub = element.rstrip("\n").split("\t")
+            state, city, latitude, longitude = sub[0], sub[1], float(sub[2]), float(sub[3])
+            all_cities.append((state, city, latitude, longitude))
 
     return all_cities
     """
@@ -31,11 +29,11 @@ def print_cities(road_map):
     print(f"{'-' * 70}")
     print(f"{' ' * 26} LIST OF CITIES")
     print(f"{'-' * 70}")
-    print(f"| ## | CITY {' ' * 15} STATE {' ' * 14} COORDS")
+    print(f"| ## | STATE {' ' * 15} CITY {' ' * 14} COORDS")
     print(f"{'-' * 70}")
 
     for index, city in enumerate(road_map, 1):
-        print(f"| {index:02} | {city[1]:<20} {city[0]:<20} ({city[2]:.2f}, {city[3]:.2f})")
+        print(f"| {index:02} | {city[0]:<20} {city[1]:<20} ({city[2]:.2f}, {city[3]:.2f})")
         print(f"{'-' * 70}")
     """
     Prints a list of cities, along with their locations. 
@@ -64,6 +62,23 @@ def compute_total_distance(road_map):
     """
 
 
+def generate_two_different_ints(road_map):
+
+    length = len(road_map) - 1
+    random_index_1 = random.randint(0, length)
+    random_index_2 = random.randint(0, length)
+
+    different_ints = not random_index_1 == random_index_2
+
+    while not different_ints:
+        random_index_2 = random.randint(0, length)
+
+        if random_index_1 != random_index_2:
+            different_ints = True
+
+    return random_index_1, random_index_2
+
+
 def swap_cities(road_map, index1, index2):
 
     road_map[index1], road_map[index2] = road_map[index2], road_map[index1]
@@ -79,6 +94,7 @@ def swap_cities(road_map, index1, index2):
 
     Allow for the possibility that `index1=index2`,
     and handle this case correctly.
+    
     """
 
 
@@ -104,17 +120,8 @@ def find_best_cycle(road_map):
     while test <= 10000:
 
         if test % 2 == 0:
-
-            different_ints = False
-
-            while not different_ints:
-                random_index_1 = random.randint(0, len(road_map) - 1)
-                random_index_2 = random.randint(0, len(road_map) - 1)
-
-                if random_index_1 != random_index_2:
-                    different_ints = True
-
-            perform_swap = swap_cities(road_map, random_index_1, random_index_2)
+            indices = generate_two_different_ints(road_map)
+            perform_swap = swap_cities(road_map, indices[0], indices[1])
             cycle_distance = perform_swap[1]
 
         else:
