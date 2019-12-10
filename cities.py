@@ -31,14 +31,13 @@ def read_cities(file_name):
 
 def print_cities(road_map):
     print(f"{'-' * 70}")
-    print(f"{' ' * 26} LIST OF CITIES")
+    print(f"{'LIST OF CITIES':^70}")
     print(f"{'-' * 70}")
-    print(f"| ## | STATE {' ' * 15} CITY {' ' * 14} COORDS")
+    print(f"| ## | STATE {' ' * 14} CITY {' ' * 16} COORDS")
     print(f"{'-' * 70}")
 
     for index, city in enumerate(road_map, 1):
         print(f"| {index:02} | {city[0]:<20} {city[1]:<20} ({city[2]:.2f}, {city[3]:.2f})")
-        print(f"{'-' * 70}")
     """
     Prints a list of cities, along with their locations. 
     Print only one or two digits after the decimal point.
@@ -147,10 +146,11 @@ def find_best_cycle(road_map):
 
 def print_map(road_map):
     length = len(road_map)
-    print(f"{' ' * 26} BEST CYCLE")
-    print(f"{'-' * 70}")
-    print(f"| ## | FROM {' ' * 20} TO {' ' * 20} COST")
-    print(f"{'-' * 70}")
+    print(f"{'-' * 85}")
+    print(f"{'BEST CYCLE':^85}")
+    print(f"{'-' * 85}")
+    print(f"| ## | FROM {' ' * 34} TO {' ' * 27} COST")
+    print(f"{'-' * 85}")
 
     for index, i in enumerate(range(length), 1):
 
@@ -159,13 +159,15 @@ def print_map(road_map):
         x2 = road_map[(i + 1) % length][2]
         y2 = road_map[(i + 1) % length][3]
 
-        print(f"| {index:02} | {road_map[i][1]}, {road_map[i][0]:<15} "
-              f"--->"
-              f"{road_map[(i + 1) % length][1]:>10}, {road_map[(i + 1) % length][0]}"
-              f" {distance(x1, y1, x2, y2):.2f}")
-        print(f"{'-' * 70}")
+        from_city_state = f"{road_map[i][1]}, {road_map[i][0]}"
+        to_city_state = f"{road_map[(i + 1) % length][1]}, {road_map[(i + 1) % length][0]}"
 
-    print(f"{'TOTAL COST':>30}: {compute_total_distance(road_map):.2f}")
+        print(f"| {index:02} | {from_city_state:<30} "
+              f" ---->   {to_city_state:<30}"
+              f" {distance(x1, y1, x2, y2):.2f}")
+        print(f"{'-' * 85}")
+
+    print(f"{'TOTAL COST':>75}: {compute_total_distance(road_map):.2f}")
 
     """
     Prints, in an easily understandable format, the cities and 
