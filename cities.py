@@ -4,15 +4,19 @@ import math
 
 def read_cities(file_name):
 
-    with open(file_name, "r") as parse_cities:
-        all_cities = []
+    try:
+        with open(file_name, "r") as parse_cities:
+            all_cities = []
+            for line in parse_cities.readlines():
+                info = line.rstrip("\n").split("\t")
+                state, city, latitude, longitude = info[0], info[1], float(info[2]), float(info[3])
+                all_cities.append((state, city, latitude, longitude))
+            return all_cities
 
-        for element in parse_cities.readlines():
-            sub = element.rstrip("\n").split("\t")
-            state, city, latitude, longitude = sub[0], sub[1], float(sub[2]), float(sub[3])
-            all_cities.append((state, city, latitude, longitude))
+    except IOError as error:
+        print("Error!", error)
+        raise SystemExit
 
-    return all_cities
     """
     Read in the cities from the given `file_name`, and return 
     them as a list of four-tuples: 
@@ -99,12 +103,9 @@ def swap_cities(road_map, index1, index2):
 
 
 def shift_cities(road_map):
-    new_road_map = [road_map[-1]]
 
-    for city in range(len(road_map) - 1):
-        new_road_map.append(road_map[city])
+    return [road_map[-1]] + [road_map[city] for city in range(len(road_map)-1)]
 
-    return new_road_map
     """
     For every index i in the `road_map`, the city at the position i moves
     to the position i+1. The city at the last position moves to the position
@@ -169,7 +170,7 @@ def print_map(road_map):
 
 
 def main():
-    list_of_cities = "city-data.txt"
+    list_of_cities = input("Please type in the file name: ")
     print_cities(read_cities(list_of_cities))
     print_map(find_best_cycle(read_cities(list_of_cities)))
 

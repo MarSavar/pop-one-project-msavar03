@@ -58,3 +58,23 @@ def test_shift_cities2():
     assert shift_cities(road_map1) == [("City 2", "State 2", 12, -52),
                                        ("City 1", "State 1", 8, 9)]
 
+
+def test_shift_cities3():
+
+    road_map1 = [1, 2, 3, 4, 5]
+
+    assert shift_cities(road_map1) == [5, 1 , 2, 3, 4]
+
+
+def test_shift_cities4():
+
+    road_map1 = ["1, 2, 3, 4, 5", (2, 3), ["a"], False]
+
+    assert shift_cities(road_map1) == [False, "1, 2, 3, 4, 5", (2, 3), ["a"]]
+
+
+def test_shift_cities5():
+
+    road_map1 = ["a"]
+
+    assert shift_cities(road_map1) == ["a"]
