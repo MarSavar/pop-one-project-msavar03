@@ -57,7 +57,7 @@ def compute_total_distance(road_map):
         total_distance += distance(road_map[i][2], road_map[i][3],
                                    road_map[(i + 1) % length][2], road_map[(i + 1) % length][3])
 
-    return total_distance
+    return float(total_distance)
 
     """
     Returns, as a floating point number, the sum of the distances of all 
@@ -123,20 +123,19 @@ def find_best_cycle(road_map):
         if test % 2 == 0:
             indices = generate_two_different_ints(road_map)
             perform_swap = swap_cities(road_map, indices[0], indices[1])
-            cycle_distance = perform_swap[1]
+            cycle, cycle_distance = perform_swap[0], perform_swap[1]
 
         else:
-            shift_cities(road_map)
-            cycle_distance = compute_total_distance(road_map)
+            cycle = shift_cities(road_map)
+            cycle_distance = compute_total_distance(cycle)
 
         if cycle_distance < best_distance:
             best_distance = cycle_distance
-            best_cycle = road_map[:]
+            best_cycle = cycle[:]
 
         test += 1
 
     return best_cycle
-
 
     """
     Using a combination of `swap_cities` and `shift_cities`, 
@@ -154,10 +153,16 @@ def print_map(road_map):
     print(f"{'-' * 70}")
 
     for index, i in enumerate(range(length), 1):
+
+        x1 = road_map[i][2]
+        y1 = road_map[i][3]
+        x2 = road_map[(i + 1) % length][2]
+        y2 = road_map[(i + 1) % length][3]
+
         print(f"| {index:02} | {road_map[i][1]}, {road_map[i][0]:<15} "
               f"--->"
               f"{road_map[(i + 1) % length][1]:>10}, {road_map[(i + 1) % length][0]}"
-              f" {distance(road_map[i][2], road_map[i][3], road_map[(i + 1) % length][2], road_map[(i + 1) % length][3]):.2f}")
+              f" {distance(x1, y1, x2, y2):.2f}")
         print(f"{'-' * 70}")
 
     print(f"{'TOTAL COST':>30}: {compute_total_distance(road_map):.2f}")
@@ -170,7 +175,7 @@ def print_map(road_map):
 
 
 def main():
-    list_of_cities = input("Please type in the file name: ")
+    list_of_cities = "city-data.txt"
     print_cities(read_cities(list_of_cities))
     print_map(find_best_cycle(read_cities(list_of_cities)))
 
