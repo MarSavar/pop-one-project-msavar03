@@ -3,7 +3,6 @@ import math
 
 
 def read_cities(file_name):
-
     try:
         with open(file_name, "r") as parse_cities:
             all_cities = []
@@ -66,7 +65,6 @@ def compute_total_distance(road_map):
 
 
 def generate_two_different_ints(road_map):
-
     length = len(road_map) - 1
     random_index_1 = random.randint(0, length)
     random_index_2 = random.randint(0, length)
@@ -83,7 +81,6 @@ def generate_two_different_ints(road_map):
 
 
 def swap_cities(road_map, index1, index2):
-
     road_map[index1], road_map[index2] = road_map[index2], road_map[index1]
 
     return road_map, compute_total_distance(road_map)
@@ -102,8 +99,7 @@ def swap_cities(road_map, index1, index2):
 
 
 def shift_cities(road_map):
-
-    return [road_map[-1]] + [road_map[city] for city in range(len(road_map)-1)]
+    return [road_map[-1]] + [road_map[city] for city in range(len(road_map) - 1)]
 
     """
     For every index i in the `road_map`, the city at the position i moves
@@ -152,19 +148,15 @@ def print_map(road_map):
     print(f"| ## | FROM {' ' * 34} TO {' ' * 27} COST")
     print(f"{'-' * 85}")
 
-    for index, i in enumerate(range(length), 1):
+    for index, city in enumerate(range(length), 1):
+        x1, y1 = road_map[city][2], road_map[city][3]
+        x2, y2 = road_map[(city + 1) % length][2], road_map[(city + 1) % length][3]
 
-        x1 = road_map[i][2]
-        y1 = road_map[i][3]
-        x2 = road_map[(i + 1) % length][2]
-        y2 = road_map[(i + 1) % length][3]
+        from_city_state = f"{road_map[city][1]}, {road_map[city][0]}"
+        to_city_state = f"{road_map[(city + 1) % length][1]}, {road_map[(city + 1) % length][0]}"
+        cost = distance(x1, y1, x2, y2)
 
-        from_city_state = f"{road_map[i][1]}, {road_map[i][0]}"
-        to_city_state = f"{road_map[(i + 1) % length][1]}, {road_map[(i + 1) % length][0]}"
-
-        print(f"| {index:02} | {from_city_state:<30} "
-              f" ---->   {to_city_state:<30}"
-              f" {distance(x1, y1, x2, y2):.2f}")
+        print(f"| {index:02} | {from_city_state:<30} ---->   {to_city_state:<30} {cost:.2f}")
         print(f"{'-' * 85}")
 
     print(f"{'TOTAL COST':>75}: {compute_total_distance(road_map):.2f}")
@@ -181,33 +173,54 @@ def visualise(road_map):
     min_lat, max_lat = int(min([coords[2] for coords in road_map])), int(max([coords[2] for coords in road_map]))
     min_long, max_long = int(min([coords[3] for coords in road_map])), int(max([coords[3] for coords in road_map]))
 
-    coords = dict()
+    coords = {(int(city[2]), int(city[3])): road_map.index(city) + 1 for city in road_map}
     grid = dict()
 
-    for city in road_map:
-        coords[int(city[2]), int(city[3])] = road_map.index(city) + 1
-
     for longitude in range(min_long, max_long + 1):
-        for latitude in range(max_lat, min_lat-1, -1):
+        for latitude in range(max_lat, min_lat - 1, -1):
             if (latitude, longitude) in coords.keys():
                 grid[latitude, longitude] = coords[latitude, longitude]
             else:
-                grid[latitude, longitude] = " "
+                grid[latitude, longitude] = ""
 
-    print("  ", end=" ")
+    print("\t", end=" ")
 
     for longitude in range(min_long, max_long + 1):
         print(longitude, end=" ")
+
     print()
-    print("  ", end=" ")
+    print("\t", end=" ")
+
     for longitude in range(min_long, max_long + 1):
-        print(" | ", end=" ")
+        if abs(longitude) >= 100:
+            print(f"{' | ':^4}", end=" ")
+        else:
+            print(f"{' | ':^3}", end=" ")
     print()
-    for latitude in range(max_lat, min_lat -1, -1):
-        print(f"{latitude}-", end= "")
+
+    for latitude in range(max_lat, min_lat - 1, -1):
+        print(f"{latitude} -", end="")
         for longitude in range(min_long, max_long + 1):
-            print(f"{grid[latitude, longitude]}| ", end=" ")
+            if abs(longitude) >= 100:
+                extra_space = " "
+            elif isinstance(grid[latitude, longitude],int):
+                if grid[latitude, longitude] < 10:
+                    extra_space = " "
+                else:
+                    extra_space = ""
+            else:
+                extra_space = ""
+            print(f"{extra_space}{grid[latitude, longitude]:^2} -", end="")
         print()
+        print("\t", end=" ")
+
+        for longitude in range(min_long, max_long + 1):
+            if abs(longitude) >= 100:
+                print(f"{' | ':^4}", end=" ")
+            else:
+                print(f"{' | ':^3}", end=" ")
+        print()
+
 
 """
     for longitude in range(min_long, max_long + 1):
@@ -223,9 +236,8 @@ def main():
     print_cities(road_map)
     best_cycle = find_best_cycle(road_map)
     print_map(best_cycle)
-    visualise(find_best_cycle([("Kentucky", "Frankfort", 38.197274, -84.86311),
- ("Delaware", "Dover", 39.161921, -75.526755),
- ("Minnesota", "Saint Paul", 44.95, -93.094)]))
+    print()
+    visualise(best_cycle)
 
     """
     Reads in, and prints out, the city data, then creates the "best"

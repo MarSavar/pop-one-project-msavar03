@@ -15,7 +15,7 @@ Suppose there are a number of "cities", as in shown in Figure 1:
 
 ![Figure 1, Cities](https://www.dcs.bbk.ac.uk/~vlad/pub/pop1/proj/Figure1.png)
 
-
+~~~~
 
 The distance between any two cities with the coordinates (x1, y1) and (x2,y2) is
  the standard Euclidean distance, that is, 

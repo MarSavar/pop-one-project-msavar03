@@ -7,8 +7,7 @@ def test_compute_total_distance():
                  ("Delaware", "Dover", 39.161921, -75.526755),
                  ("Minnesota", "Saint Paul", 44.95, -93.094)]
 
-    assert compute_total_distance(road_map1) == \
-           pytest.approx(9.386 + 18.496 + 10.646, 0.01)
+    assert compute_total_distance(road_map1) == pytest.approx(9.386 + 18.496 + 10.646, 0.01)
 
     '''add your further tests'''
 
@@ -51,7 +50,6 @@ def test_shift_cities():
 
 
 def test_shift_cities2():
-
     road_map1 = [("City 1", "State 1", 8, 9),
                  ("City 2", "State 2", 12, -52)]
 
@@ -60,21 +58,18 @@ def test_shift_cities2():
 
 
 def test_shift_cities3():
-
     road_map1 = [1, 2, 3, 4, 5]
 
     assert shift_cities(road_map1) == [5, 1, 2, 3, 4]
 
 
 def test_shift_cities4():
-
     road_map1 = ["1, 2, 3, 4, 5", (2, 3), ["a"], False]
 
     assert shift_cities(road_map1) == [False, "1, 2, 3, 4, 5", (2, 3), ["a"]]
 
 
 def test_shift_cities5():
-
     road_map1 = ["a"]
 
     assert shift_cities(road_map1) == ["a"]
