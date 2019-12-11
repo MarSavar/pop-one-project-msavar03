@@ -63,7 +63,7 @@ def test_shift_cities3():
 
     road_map1 = [1, 2, 3, 4, 5]
 
-    assert shift_cities(road_map1) == [5, 1 , 2, 3, 4]
+    assert shift_cities(road_map1) == [5, 1, 2, 3, 4]
 
 
 def test_shift_cities4():

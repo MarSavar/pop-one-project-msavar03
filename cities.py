@@ -176,10 +176,56 @@ def print_map(road_map):
     """
 
 
+def visualise(road_map):
+
+    min_lat, max_lat = int(min([coords[2] for coords in road_map])), int(max([coords[2] for coords in road_map]))
+    min_long, max_long = int(min([coords[3] for coords in road_map])), int(max([coords[3] for coords in road_map]))
+
+    coords = dict()
+    grid = dict()
+
+    for city in road_map:
+        coords[int(city[2]), int(city[3])] = road_map.index(city) + 1
+
+    for longitude in range(min_long, max_long + 1):
+        for latitude in range(max_lat, min_lat-1, -1):
+            if (latitude, longitude) in coords.keys():
+                grid[latitude, longitude] = coords[latitude, longitude]
+            else:
+                grid[latitude, longitude] = " "
+
+    print("  ", end=" ")
+
+    for longitude in range(min_long, max_long + 1):
+        print(longitude, end=" ")
+    print()
+    print("  ", end=" ")
+    for longitude in range(min_long, max_long + 1):
+        print(" | ", end=" ")
+    print()
+    for latitude in range(max_lat, min_lat -1, -1):
+        print(f"{latitude}-", end= "")
+        for longitude in range(min_long, max_long + 1):
+            print(f"{grid[latitude, longitude]}| ", end=" ")
+        print()
+
+"""
+    for longitude in range(min_long, max_long + 1):
+        for latitude in range(max_lat, min_lat-1, -1):
+            print(grid[latitude,longitude], end=" | ")
+        print()
+"""
+
+
 def main():
     list_of_cities = "city-data.txt"
-    print_cities(read_cities(list_of_cities))
-    print_map(find_best_cycle(read_cities(list_of_cities)))
+    road_map = read_cities(list_of_cities)
+    print_cities(road_map)
+    best_cycle = find_best_cycle(road_map)
+    print_map(best_cycle)
+    visualise(find_best_cycle([("Kentucky", "Frankfort", 38.197274, -84.86311),
+ ("Delaware", "Dover", 39.161921, -75.526755),
+ ("Minnesota", "Saint Paul", 44.95, -93.094)]))
 
     """
     Reads in, and prints out, the city data, then creates the "best"
