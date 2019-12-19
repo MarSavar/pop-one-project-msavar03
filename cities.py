@@ -3,18 +3,14 @@ import math
 
 
 def read_cities(file_name):
-    try:
-        with open(file_name, "r") as parse_cities:
-            all_cities = []
-            for line in parse_cities.readlines():
-                info = line.rstrip("\n").split("\t")
-                state, city, latitude, longitude = info[0], info[1], float(info[2]), float(info[3])
-                all_cities.append((state, city, latitude, longitude))
-            return all_cities
 
-    except IOError as error:
-        print("Error!", error)
-        raise SystemExit
+    with open(file_name, "r") as parse_cities:
+        all_cities = []
+        for line in parse_cities.readlines():
+            info = line.rstrip("\n").split("\t")
+            state, city, latitude, longitude = info[0], info[1], float(info[2]), float(info[3])
+            all_cities.append((state, city, latitude, longitude))
+        return all_cities
 
     """
     Read in the cities from the given `file_name`, and return 
@@ -69,7 +65,7 @@ def generate_two_different_ints(road_map):
     random_index_1 = random.randint(0, length)
     random_index_2 = random.randint(0, length)
 
-    different_ints = not random_index_1 == random_index_2
+    different_ints = not (random_index_1 == random_index_2)
 
     while not different_ints:
         random_index_2 = random.randint(0, length)
@@ -183,61 +179,57 @@ def visualise(road_map):
             else:
                 grid[latitude, longitude] = ""
 
-    print("\t", end=" ")
+    plot = 0
+    plot_lat = 0
 
-    for longitude in range(min_long, max_long + 1):
-        print(longitude, end=" ")
+    print("\t ", end=" ")
 
-    print()
-    print("\t", end=" ")
+    long_range = abs(max_long - min_long)
 
-    for longitude in range(min_long, max_long + 1):
-        if abs(longitude) >= 100:
-            print(f"{' | ':^4}", end=" ")
-        else:
-            print(f"{' | ':^3}", end=" ")
-    print()
-
-    for latitude in range(max_lat, min_lat - 1, -1):
-        print(f"{latitude} -", end="")
-        for longitude in range(min_long, max_long + 1):
-            if abs(longitude) >= 100:
-                extra_space = " "
-            elif isinstance(grid[latitude, longitude],int):
-                if grid[latitude, longitude] < 10:
-                    extra_space = " "
-                else:
-                    extra_space = ""
-            else:
-                extra_space = ""
-            print(f"{extra_space}{grid[latitude, longitude]:^2} -", end="")
-        print()
-        print("\t", end=" ")
+    for latitude in range(max_lat + 3, min_lat - 1, -1):
 
         for longitude in range(min_long, max_long + 1):
-            if abs(longitude) >= 100:
-                print(f"{' | ':^4}", end=" ")
-            else:
-                print(f"{' | ':^3}", end=" ")
-        print()
+            if plot <= long_range:
+                print(f"{longitude:^4}", end=" ")
+            elif plot == long_range + 1:
+                print("\n\t ", end=" ")
+                vertical_bar = f"{'|':^5}"
+                print(f"{vertical_bar * abs(long_range + 1)}")
+            plot += 1
 
+        if plot_lat > 2:
+            print(latitude, end="\t ")
+            for i in range(min_long, max_long+1):
+                print("-", end="")
+                if (latitude, i) in grid.keys():
+                    print(f"{grid[latitude, i]:>3}", end=" ")
+            print()
+            if latitude > min_lat:
+                print("\t ", end=" ")
+                vertical_bar = f"{'|':^5}"
+                print(f"{vertical_bar * abs(long_range + 1)}")
 
-"""
-    for longitude in range(min_long, max_long + 1):
-        for latitude in range(max_lat, min_lat-1, -1):
-            print(grid[latitude,longitude], end=" | ")
-        print()
-"""
+        plot_lat += 1
 
 
 def main():
-    list_of_cities = "city-data.txt"
+    finished = False
+    list_of_cities = input("Please type in the file to read: ")
+    while not finished:
+        try:
+            read_cities(list_of_cities)
+            finished = True
+        except IOError as error:
+            print(error)
+            list_of_cities = input("Try again: ")
+
     road_map = read_cities(list_of_cities)
     print_cities(road_map)
     best_cycle = find_best_cycle(road_map)
     print_map(best_cycle)
     print()
     visualise(best_cycle)
+
 
     """
     Reads in, and prints out, the city data, then creates the "best"
