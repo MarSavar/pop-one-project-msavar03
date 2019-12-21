@@ -166,64 +166,70 @@ def print_map(road_map):
 
 def visualise(road_map):
 
-    min_lat, max_lat = int(min([coords[2] for coords in road_map])), int(max([coords[2] for coords in road_map]))
-    min_long, max_long = int(min([coords[3] for coords in road_map])), int(max([coords[3] for coords in road_map]))
+    all_latitudes, all_longitudes = [coords[2] for coords in road_map], [coords[3] for coords in road_map]
+
+    min_lat, max_lat = int(min(all_latitudes)), int(max(all_latitudes))
+    min_long, max_long = int(min(all_longitudes)), int(max(all_longitudes))
 
     coords = {(int(city[2]), int(city[3])): road_map.index(city) + 1 for city in road_map}
-    grid = dict()
 
-    for longitude in range(min_long, max_long + 1):
-        for latitude in range(max_lat, min_lat - 1, -1):
-            if (latitude, longitude) in coords.keys():
-                grid[latitude, longitude] = coords[latitude, longitude]
-            else:
-                grid[latitude, longitude] = ""
-
-    plot = 0
+    plot_long = 0
     plot_lat = 0
+    long_range = abs(max_long - min_long)
 
     print("\t ", end=" ")
-
-    long_range = abs(max_long - min_long)
 
     for latitude in range(max_lat + 3, min_lat - 1, -1):
 
         for longitude in range(min_long, max_long + 1):
-            if plot <= long_range:
+            if plot_long <= long_range:
                 print(f"{longitude:^4}", end=" ")
-            elif plot == long_range + 1:
-                print("\n\t ", end=" ")
+            elif plot_long == long_range + 1:
                 vertical_bar = f"{'|':^5}"
-                print(f"{vertical_bar * abs(long_range + 1)}")
-            plot += 1
+                print(f"\n\t {vertical_bar * abs(long_range + 1)}")
+            plot_long += 1
 
         if plot_lat > 2:
+
             print(latitude, end="\t ")
-            for i in range(min_long, max_long+1):
+            for i in range(min_long, max_long + 1):
                 print("-", end="")
-                if (latitude, i) in grid.keys():
-                    print(f"{grid[latitude, i]:>3}", end=" ")
+                if (latitude, i) in coords.keys():
+                    print(f"{coords[latitude, i]:^3}", end=" ")
+                else:
+                    print(f"{'':>3}", end=" ")
             print()
             if latitude > min_lat:
-                print("\t ", end=" ")
                 vertical_bar = f"{'|':^5}"
-                print(f"{vertical_bar * abs(long_range + 1)}")
+                print(f"\t {vertical_bar * abs(long_range + 1)}")
 
         plot_lat += 1
 
+        """
+        Generates a grid of size max_long * max_lat, then maps all
+        coordinates into a dictionary.
+        Whenever the coordinates match a city, its position on the
+        road map is printed out on the grid.
+        """
+
 
 def main():
+
     finished = False
     list_of_cities = input("Please type in the file to read: ")
+
     while not finished:
         try:
-            read_cities(list_of_cities)
-            finished = True
+            if list_of_cities[-4:] == ".txt":
+                road_map = read_cities(list_of_cities)
+                finished = True
+            else:
+                print("Incorrect format, please try again.")
+                list_of_cities = input("Try again: ")
         except IOError as error:
             print(error)
             list_of_cities = input("Try again: ")
 
-    road_map = read_cities(list_of_cities)
     print_cities(road_map)
     best_cycle = find_best_cycle(road_map)
     print_map(best_cycle)
