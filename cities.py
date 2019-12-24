@@ -75,6 +75,12 @@ def generate_two_different_ints(road_map):
 
     return random_index_1, random_index_2
 
+    '''
+    Generates two integer numbers that are always 
+    different, therefore the same two numbers can never
+    be passed to swap_cities() 
+    '''
+
 
 def swap_cities(road_map, index1, index2):
     road_map[index1], road_map[index2] = road_map[index2], road_map[index1]
@@ -141,7 +147,7 @@ def print_map(road_map):
     print(f"{'-' * 85}")
     print(f"{'BEST CYCLE':^85}")
     print(f"{'-' * 85}")
-    print(f"| ## | FROM {' ' * 34} TO {' ' * 27} COST")
+    print(f"| ## | FROM {' ' * 33} TO {' ' * 27} COST")
     print(f"{'-' * 85}")
 
     for index, city in enumerate(range(length), 1):
@@ -155,7 +161,7 @@ def print_map(road_map):
         print(f"| {index:02} | {from_city_state:<30} ---->   {to_city_state:<30} {cost:.2f}")
         print(f"{'-' * 85}")
 
-    print(f"{'TOTAL COST':>75}: {compute_total_distance(road_map):.2f}")
+    print(f"{'>>> TOTAL COST':>75}: {compute_total_distance(road_map):.2f}")
 
     """
     Prints, in an easily understandable format, the cities and 
@@ -195,10 +201,11 @@ def visualise(road_map):
             for i in range(min_long, max_long + 1):
                 print("-", end="")
                 if (latitude, i) in coords.keys():
-                    print(f"{coords[latitude, i]:^3}", end=" ")
+                    print(f"{coords[latitude, i]:^4}", end="")
                 else:
-                    print(f"{'':>3}", end=" ")
+                    print(f"{'':^4}", end="")
             print()
+
             if latitude > min_lat:
                 vertical_bar = f"{'|':^5}"
                 print(f"\t {vertical_bar * abs(long_range + 1)}")
@@ -219,15 +226,15 @@ def main():
     list_of_cities = input("Please type in the file to read: ")
 
     while not finished:
-        try:
-            if list_of_cities[-4:] == ".txt":
+        if list_of_cities[-4:] == ".txt":
+            try:
                 road_map = read_cities(list_of_cities)
                 finished = True
-            else:
-                print("Incorrect format, please try again.")
+            except IOError as error:
+                print(error)
                 list_of_cities = input("Try again: ")
-        except IOError as error:
-            print(error)
+        else:
+            print("Incorrect format, please try again.")
             list_of_cities = input("Try again: ")
 
     print_cities(road_map)
@@ -235,7 +242,6 @@ def main():
     print_map(best_cycle)
     print()
     visualise(best_cycle)
-
 
     """
     Reads in, and prints out, the city data, then creates the "best"

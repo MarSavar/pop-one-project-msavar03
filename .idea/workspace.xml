@@ -4,7 +4,6 @@
     <list default="true" id="8309cf2b-6ebf-4ecf-8a10-79a1d9e9a823" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cities.py" beforeDir="false" afterPath="$PROJECT_DIR$/cities.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_cities.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_cities.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +117,7 @@
       <workItem from="1575280808598" duration="12755000" />
       <workItem from="1575723141872" duration="6808000" />
       <workItem from="1576022685017" duration="23439000" />
-      <workItem from="1576755557856" duration="16672000" />
+      <workItem from="1576755557856" duration="22286000" />
     </task>
     <task id="LOCAL-00001" summary="Added more tests">
       <created>1573919531845</created>
@@ -253,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576763072184</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Strengthened main() so the program never crashed, added further tests">
+      <created>1576971811981</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1576971811982</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,10 +297,11 @@
     <MESSAGE value="Rough implementation of visualise()" />
     <MESSAGE value="Improved visualise()" />
     <MESSAGE value="Improved visualise() function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved visualise() function" />
+    <MESSAGE value="Strengthened main() so the program never crashed, added further tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Strengthened main() so the program never crashed, added further tests" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pop_one_project_msavar03$Test.coverage" NAME="Test Coverage Results" MODIFIED="1575655757267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pop_one_project_msavar03$cities.coverage" NAME="cities Coverage Results" MODIFIED="1576970715329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pop_one_project_msavar03$cities.coverage" NAME="cities Coverage Results" MODIFIED="1577209529700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
