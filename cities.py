@@ -48,8 +48,8 @@ def compute_total_distance(road_map):
     total_distance = 0
 
     for i in range(length):
-        total_distance += distance(road_map[i][2], road_map[i][3],
-                                   road_map[(i + 1) % length][2], road_map[(i + 1) % length][3])
+        total_distance += distance(road_map[i][3], road_map[i][2],
+                                   road_map[(i + 1) % length][3], road_map[(i + 1) % length][2])
 
     return float(total_distance)
 
@@ -153,8 +153,8 @@ def print_map(road_map):
     print(f"{'-' * 85}")
 
     for index, city in enumerate(range(length), 1):
-        x1, y1 = road_map[city][2], road_map[city][3]
-        x2, y2 = road_map[(city + 1) % length][2], road_map[(city + 1) % length][3]
+        x1, y1 = road_map[city][3], road_map[city][2]
+        x2, y2 = road_map[(city + 1) % length][3], road_map[(city + 1) % length][2]
 
         from_city_state = f"{road_map[city][1]}, {road_map[city][0]}"
         to_city_state = f"{road_map[(city + 1) % length][1]}, {road_map[(city + 1) % length][0]}"
