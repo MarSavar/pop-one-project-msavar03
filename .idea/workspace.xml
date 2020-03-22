@@ -36,7 +36,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -50,7 +50,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.pytest in test_cities.py">
+  <component name="RunManager" selected="Python.cities">
     <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pop-one-project-msavar03" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,8 +129,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest in test_cities.py" />
         <item itemvalue="Python.cities" />
+        <item itemvalue="Python tests.pytest in test_cities.py" />
         <item itemvalue="Python tests.pytest for test_cities.test_compute_total_distance2" />
         <item itemvalue="Python.Test" />
       </list>
@@ -160,7 +160,19 @@
       <workItem from="1577976343586" duration="2760000" />
       <workItem from="1578047868209" duration="1238000" />
       <workItem from="1578225266993" duration="1759000" />
-      <workItem from="1578227051156" duration="3953000" />
+      <workItem from="1578227051156" duration="5311000" />
+      <workItem from="1578859053817" duration="262000" />
+      <workItem from="1579368719076" duration="623000" />
+      <workItem from="1580505587587" duration="28000" />
+      <workItem from="1580505659991" duration="775000" />
+      <workItem from="1580552503110" duration="630000" />
+      <workItem from="1580687726422" duration="23000" />
+      <workItem from="1580909103282" duration="276000" />
+      <workItem from="1580925956722" duration="1555000" />
+      <workItem from="1581157008994" duration="53000" />
+      <workItem from="1581164137159" duration="598000" />
+      <workItem from="1582050497055" duration="598000" />
+      <workItem from="1584904546078" duration="395000" />
     </task>
     <task id="LOCAL-00001" summary="Added more tests">
       <created>1573919531845</created>
@@ -316,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578252967671</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Final version - optimised best cycle so it loops on itself rather than the original road map.">
+      <created>1578312728182</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1578312728182</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,14 +374,14 @@
     <MESSAGE value="Improved visualise()" />
     <MESSAGE value="Improved visualise() function" />
     <MESSAGE value="Strengthened main() so the program never crashed, added further tests" />
-    <MESSAGE value="Final version" />
     <MESSAGE value="Final version - optimised best cycle so it loops on itself rather than the original road map." />
-    <option name="LAST_COMMIT_MESSAGE" value="Final version - optimised best cycle so it loops on itself rather than the original road map." />
+    <MESSAGE value="Final version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final version" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/pop_one_project_msavar03$pytest_in_test_cities_py.coverage" NAME="pytest in test_cities.py Coverage Results" MODIFIED="1578312710834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pop_one_project_msavar03$pytest_in_test_cities_py.coverage" NAME="pytest in test_cities.py Coverage Results" MODIFIED="1578313323168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pop_one_project_msavar03$pytest_for_test_cities_test_compute_total_distance2.coverage" NAME="pytest for test_cities.test_compute_total_distance2 Coverage Results" MODIFIED="1578227016393" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pop_one_project_msavar03$Test.coverage" NAME="Test Coverage Results" MODIFIED="1575655757267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pop_one_project_msavar03$cities.coverage" NAME="cities Coverage Results" MODIFIED="1578312680885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pop_one_project_msavar03$cities.coverage" NAME="cities Coverage Results" MODIFIED="1584904906450" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
